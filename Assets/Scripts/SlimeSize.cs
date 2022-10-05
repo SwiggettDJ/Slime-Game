@@ -18,7 +18,7 @@ public class SlimeSize : MonoBehaviour
 
     private void UpdateSize()
     {
-        transform.localScale = new Vector3(transform.localScale.x * slimeSize, transform.localScale.y * slimeSize, 1);
+        transform.localScale = new Vector3(slimeSize, slimeSize, transform.localScale.z);
     }
 
     public void AddSize(float delta)

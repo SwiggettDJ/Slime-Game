@@ -8,8 +8,9 @@ public class SlimeMovement : MonoBehaviour
     private CharacterController playerController;
     public Joystick joystick;
     public float speed = 6f;
+    private bool isMoving = false;
 
-    public UnityEvent MovementEvent;
+    public UnityEvent MovementStartEvent, MovementEndEvent;
 
     private void Start()
     {
@@ -25,7 +26,20 @@ public class SlimeMovement : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             playerController.Move(direction * speed * Time.deltaTime);
-            MovementEvent.Invoke();
+            if (!isMoving)
+            {
+                MovementStartEvent.Invoke();
+                isMoving = true;
+            }
         }
+        else
+        {
+            if (isMoving)
+            {
+                MovementEndEvent.Invoke();
+                isMoving = false;
+            }
+        }
+        playerController.Move(Physics.gravity* Time.deltaTime);
     }
 }

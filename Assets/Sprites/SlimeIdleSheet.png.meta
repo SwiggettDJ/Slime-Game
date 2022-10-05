@@ -26,6 +26,30 @@ TextureImporter:
   - first:
       213: -3373964639730116074
     second: Slime_7
+  - first:
+      213: -359908854502224583
+    second: SlimeIdleSheet_0
+  - first:
+      213: 9173519898840791250
+    second: SlimeIdleSheet_1
+  - first:
+      213: 3479804483105237648
+    second: SlimeIdleSheet_2
+  - first:
+      213: -3484935705942597705
+    second: SlimeIdleSheet_3
+  - first:
+      213: 413657456850172380
+    second: SlimeIdleSheet_4
+  - first:
+      213: -3530856815355536222
+    second: SlimeIdleSheet_5
+  - first:
+      213: -4615450074211587171
+    second: SlimeIdleSheet_6
+  - first:
+      213: -5016284073789842429
+    second: SlimeIdleSheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,169 +163,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_0
+      name: SlimeIdleSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 100
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1036b4a492dfdea90800000000000000
-      internalID: -7282886668606283007
+      spriteID: 93d80efbdc8510bf0800000000000000
+      internalID: -359908854502224583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_1
+      name: SlimeIdleSheet_1
       rect:
         serializedVersion: 2
         x: 50
         y: 100
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3169df707c3d3be30800000000000000
-      internalID: 4518187702968751635
+      spriteID: 2d8f16e9eb3ee4f70800000000000000
+      internalID: 9173519898840791250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_2
+      name: SlimeIdleSheet_2
       rect:
         serializedVersion: 2
         x: 100
         y: 100
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75eaeb3501dc47860800000000000000
-      internalID: 7526866347251117655
+      spriteID: 09aac479dbfba4030800000000000000
+      internalID: 3479804483105237648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_3
+      name: SlimeIdleSheet_3
       rect:
         serializedVersion: 2
         x: 0
         y: 50
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51e2583bdb88a5200800000000000000
-      internalID: 169598284321861141
+      spriteID: 7bf573e707503afc0800000000000000
+      internalID: -3484935705942597705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_4
+      name: SlimeIdleSheet_4
       rect:
         serializedVersion: 2
         x: 50
         y: 50
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a1b3d0ba40fcc8f0800000000000000
-      internalID: -518775653469539935
+      spriteID: cd9fe3ee34b9db500800000000000000
+      internalID: 413657456850172380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_5
+      name: SlimeIdleSheet_5
       rect:
         serializedVersion: 2
         x: 100
         y: 50
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01e73e0d3b5b231f0800000000000000
-      internalID: -1066590377825042928
+      spriteID: 2ac57f70f60effec0800000000000000
+      internalID: -3530856815355536222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_6
+      name: SlimeIdleSheet_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37b0b503dd8880940800000000000000
-      internalID: 5262606648162847603
+      spriteID: d9b61187c90a2ffb0800000000000000
+      internalID: -4615450074211587171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_7
+      name: SlimeIdleSheet_7
       rect:
         serializedVersion: 2
         x: 50
         y: 0
         width: 50
         height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61a582449054d21d0800000000000000
-      internalID: -3373964639730116074
+      spriteID: 30c9e495634926ab0800000000000000
+      internalID: -5016284073789842429
       vertices: []
       indices: 
       edges: []
