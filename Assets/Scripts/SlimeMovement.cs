@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
 public class SlimeMovement : MonoBehaviour
@@ -7,6 +8,8 @@ public class SlimeMovement : MonoBehaviour
     private CharacterController playerController;
     public Joystick joystick;
     public float speed = 6f;
+
+    public UnityEvent MovementEvent;
 
     private void Start()
     {
@@ -22,6 +25,7 @@ public class SlimeMovement : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             playerController.Move(direction * speed * Time.deltaTime);
+            MovementEvent.Invoke();
         }
     }
 }

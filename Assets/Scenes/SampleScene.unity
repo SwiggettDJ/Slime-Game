@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 755757659}
   - component: {fileID: 755757661}
   - component: {fileID: 755757662}
+  - component: {fileID: 755757663}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -330,6 +331,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95fdecb2439791641af8a5490bb3dcc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &755757663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755757658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c7a08e402a8e64f92c6a864529387e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &963194225
@@ -616,6 +629,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 2929252284630522472}
   speed: 6
+  MovementEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 755757663}
+        m_TargetAssemblyTypeName: SlimeSize, Assembly-CSharp
+        m_MethodName: AddSize
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -0.0000001
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1386125140
 GameObject:
   m_ObjectHideFlags: 3
@@ -1157,7 +1185,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.1
-      minScalar: 1
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3068,7 +3096,7 @@ ParticleSystem:
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.1
+      scalar: -0.15
       minScalar: 0
       maxCurve:
         serializedVersion: 2
