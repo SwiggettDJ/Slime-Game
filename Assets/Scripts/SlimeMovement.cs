@@ -9,6 +9,11 @@ public class SlimeMovement : MonoBehaviour
     public Joystick joystick;
     public float speed = 6f;
     private bool isMoving = false;
+    public float gravity = -10f;
+    private float maxGravity = -15f;
+    public float jumpStrength = 5f;
+    private float jumpThreshold = 0.2f;
+    public Vector3 direction;
 
     public UnityEvent MovementStartEvent, MovementEndEvent;
 
@@ -21,11 +26,16 @@ public class SlimeMovement : MonoBehaviour
     {
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
-
-        Vector3 direction = new Vector3(horizontal, 0f, vertical);
-        if (direction.magnitude >= 0.1f)
+        float size = playerController.height;
+        
+        if (playerController.isGrounded)
         {
-            playerController.Move(direction * speed * Time.deltaTime);
+            direction.y = 0;
+        }
+        
+        if (Mathf.Abs(horizontal) >= 0.1f)
+        {
+            direction.x = horizontal * speed;
             if (!isMoving)
             {
                 MovementStartEvent.Invoke();
@@ -34,12 +44,25 @@ public class SlimeMovement : MonoBehaviour
         }
         else
         {
+            direction.x = 0;
             if (isMoving)
             {
                 MovementEndEvent.Invoke();
                 isMoving = false;
             }
         }
-        playerController.Move(Physics.gravity* Time.deltaTime);
+        if (vertical >= jumpThreshold && playerController.isGrounded)
+        {
+            //jump strength should be proportional to size of slime
+            direction.y = jumpStrength * size;
+        }
+
+        if (!playerController.isGrounded)
+        {
+            direction.y += gravity * Mathf.Clamp(size, 0.2f, 1.5f) * Time.deltaTime;
+            direction.y = Mathf.Clamp(direction.y, maxGravity, Single.PositiveInfinity);
+        }
+        playerController.Move(direction * Time.deltaTime);
+        //playerController.Move(Physics.gravity * gravityMult * Time.deltaTime);
     }
 }

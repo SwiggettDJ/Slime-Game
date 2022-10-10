@@ -1,13 +1,16 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class SlimeSize : MonoBehaviour
 {
     private float slimeSize;
+    private CharacterController controller;
 
     private void Start()
     {
-         ResetSlimeSize();
+        controller = GetComponent<CharacterController>();
+        ResetSlimeSize();
     }
 
     public void ResetSlimeSize()
@@ -19,6 +22,8 @@ public class SlimeSize : MonoBehaviour
     private void UpdateSize()
     {
         transform.localScale = new Vector3(slimeSize, slimeSize, transform.localScale.z);
+        controller.height = slimeSize;
+        controller.radius = slimeSize / 2;
     }
 
     public void AddSize(float delta)
