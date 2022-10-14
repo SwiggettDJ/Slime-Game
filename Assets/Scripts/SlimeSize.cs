@@ -6,10 +6,12 @@ public class SlimeSize : MonoBehaviour
 {
     private float slimeSize;
     private CharacterController controller;
+    private ParticleSystem slimeEffect;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        slimeEffect = GetComponentInChildren<ParticleSystem>();
         ResetSlimeSize();
     }
 
@@ -21,9 +23,7 @@ public class SlimeSize : MonoBehaviour
 
     private void UpdateSize()
     {
-        transform.localScale = new Vector3(slimeSize, slimeSize, transform.localScale.z);
-        controller.height = slimeSize;
-        controller.radius = slimeSize / 2;
+        transform.localScale = new Vector3(slimeSize, slimeSize, slimeSize);
     }
 
     public void AddSize(float delta)

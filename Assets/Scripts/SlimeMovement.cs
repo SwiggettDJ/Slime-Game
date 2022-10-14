@@ -13,9 +13,9 @@ public class SlimeMovement : MonoBehaviour
     private float maxGravity = -15f;
     public float jumpStrength = 5f;
     private float jumpThreshold = 0.2f;
-    public Vector3 direction;
+    private Vector3 direction;
 
-    public UnityEvent MovementStartEvent, MovementEndEvent;
+    public UnityEvent MovementStartEvent, MovementEndEvent, FacingRightEvent, FacingLeftEvent;
 
     private void Start()
     {
@@ -32,6 +32,9 @@ public class SlimeMovement : MonoBehaviour
         {
             direction.y = 0;
         }
+
+        if (horizontal < 0) FacingLeftEvent.Invoke();
+        else if(horizontal > 0) FacingRightEvent.Invoke();
         
         if (Mathf.Abs(horizontal) >= 0.1f)
         {
