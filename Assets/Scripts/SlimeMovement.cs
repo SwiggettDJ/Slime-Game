@@ -8,22 +8,30 @@ public class SlimeMovement : MonoBehaviour
     private CharacterController playerController;
     public Joystick joystick;
     public float speed = 6f;
-    private bool isMoving = false;
     public float gravity = -10f;
+    private float slimeLossMultiplier;
     private float maxGravity = -15f;
     public float jumpStrength = 5f;
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
 
-    public UnityEvent MovementStartEvent, MovementEndEvent, FacingRightEvent, FacingLeftEvent;
+    private float lastPos;
+    private float currentPos;
+    public FloatData distanceCovered;
+
+    public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent;
 
     private void Start()
     {
+        slimeLossMultiplier = 0.02f;
         playerController = GetComponent<CharacterController>();
+        lastPos = currentPos = transform.position.x;
+        distanceCovered.value = 0;
     }
 
     void Update()
     {
+        currentPos = transform.position.x;
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
         float size = playerController.height;
@@ -39,25 +47,19 @@ public class SlimeMovement : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 0.1f)
         {
             direction.x = horizontal * speed;
-            if (!isMoving)
-            {
-                MovementStartEvent.Invoke();
-                isMoving = true;
-            }
+            distanceCovered.value = -slimeLossMultiplier * Mathf.Abs(currentPos - lastPos);
+            MovementEvent.Invoke();
         }
         else
         {
             direction.x = 0;
-            if (isMoving)
-            {
-                MovementEndEvent.Invoke();
-                isMoving = false;
-            }
         }
         if (vertical >= jumpThreshold && playerController.isGrounded)
         {
             //jump strength should be proportional to size of slime
             direction.y = jumpStrength * size;
+            //Take a chunk of size off for jumping
+            JumpEvent.Invoke();
         }
 
         if (!playerController.isGrounded)
@@ -67,5 +69,7 @@ public class SlimeMovement : MonoBehaviour
         }
         playerController.Move(direction * Time.deltaTime);
         //playerController.Move(Physics.gravity * gravityMult * Time.deltaTime);
+
+        lastPos = currentPos;
     }
 }
