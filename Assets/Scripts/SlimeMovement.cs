@@ -14,6 +14,7 @@ public class SlimeMovement : MonoBehaviour
     public float jumpStrength = 5f;
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
+    private Animator slimeAnimator;
 
     private float lastPos;
     private float currentPos;
@@ -27,6 +28,7 @@ public class SlimeMovement : MonoBehaviour
         playerController = GetComponent<CharacterController>();
         lastPos = currentPos = transform.position.x;
         distanceCovered.value = 0;
+        slimeAnimator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -49,10 +51,12 @@ public class SlimeMovement : MonoBehaviour
             direction.x = horizontal * speed;
             distanceCovered.value = -slimeLossMultiplier * Mathf.Abs(currentPos - lastPos);
             MovementEvent.Invoke();
+            slimeAnimator.SetBool("isWalking", true);
         }
         else
         {
             direction.x = 0;
+            slimeAnimator.SetBool("isWalking", false);
         }
         if (vertical >= jumpThreshold && playerController.isGrounded)
         {
@@ -64,12 +68,13 @@ public class SlimeMovement : MonoBehaviour
 
         if (!playerController.isGrounded)
         {
+            slimeAnimator.SetBool("isWalking", false);
             direction.y += gravity * Mathf.Clamp(size, 0.2f, 1.5f) * Time.deltaTime;
             direction.y = Mathf.Clamp(direction.y, maxGravity, Single.PositiveInfinity);
         }
         playerController.Move(direction * Time.deltaTime);
-        //playerController.Move(Physics.gravity * gravityMult * Time.deltaTime);
-
+        
+        
         lastPos = currentPos;
     }
 }
