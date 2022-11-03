@@ -68,7 +68,6 @@ public class SlimeMovement : MonoBehaviour
 
         if (!playerController.isGrounded)
         {
-            slimeAnimator.SetBool("isWalking", false);
             direction.y += gravity * Mathf.Clamp(size, 0.2f, 1.5f) * Time.deltaTime;
             direction.y = Mathf.Clamp(direction.y, maxGravity, Single.PositiveInfinity);
         }
