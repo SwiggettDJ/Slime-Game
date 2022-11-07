@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
-public class SlimeSize : MonoBehaviour
+public class SlimeSize : EntityBehavior
 {
-    private float slimeSize;
     private CharacterController controller;
     private ParticleSystem slimeEffect;
 
@@ -15,33 +14,34 @@ public class SlimeSize : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         slimeEffect = GetComponentInChildren<ParticleSystem>();
-        ResetSlimeSize();
+        ResetSize();
     }
 
-    public void ResetSlimeSize()
+    protected override void UpdateSize()
     {
-        slimeSize = 1;
-        UpdateSize();
-    }
-
-    private void UpdateSize()
-    {
-        transform.localScale = new Vector3(slimeSize, slimeSize, slimeSize);
-        if (slimeSize <= 0)
+        base.UpdateSize();
+        if (size <= 0)
         {
             DeathEvent.Invoke();
         }
     }
 
-    public void AddSize(float delta)
+    private void CompareSize(EntityBehavior other)
     {
-        slimeSize += delta;
-        
-        UpdateSize();
+        float otherSize = other.GetSize();
+        if (size > otherSize)
+        {
+            AddSize(otherSize/2);
+            print("Added " + otherSize + "\n");
+        }
+        else
+        {
+            print("too big \n");
+        }
     }
-    public void AddSize(FloatData delta)
+
+    private void OnTriggerEnter(Collider other)
     {
-        slimeSize += delta.value;
-        UpdateSize();
+        CompareSize(other.GetComponent<EntityBehavior>());
     }
 }

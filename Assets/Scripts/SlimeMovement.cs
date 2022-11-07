@@ -15,6 +15,10 @@ public class SlimeMovement : MonoBehaviour
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
     private Animator slimeAnimator;
+    private bool isFalling = false;
+    private float airTime = 0f;
+    private float fallThreshhold = 0.2f;
+    private bool isJumping = false;
 
     private float lastPos;
     private float currentPos;
@@ -31,16 +35,32 @@ public class SlimeMovement : MonoBehaviour
         slimeAnimator = GetComponentInChildren<Animator>();
     }
 
+    //Why does mathF not have a remap??
+    private float Remap(float value, float inMin, float inMax, float outMin, float outMax)
+    {
+        float inversed = Mathf.InverseLerp(inMin, inMax, value);
+        return Mathf.Lerp(outMin, outMax, inversed);
+    }
+
     void Update()
     {
         currentPos = transform.position.x;
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
-        float size = playerController.height;
+        float size = transform.localScale.y;
         
+        float remappedSize = Remap(size, 0f, 2f, .5f, 1.5f);
+
         if (playerController.isGrounded)
         {
+            if (isFalling)
+            {
+                slimeAnimator.SetTrigger("Landed");
+            }
+            isFalling = false;
+            isJumping = false;
             direction.y = 0;
+            airTime = 0f;
         }
 
         if (horizontal < 0) FacingLeftEvent.Invoke();
@@ -48,7 +68,7 @@ public class SlimeMovement : MonoBehaviour
         
         if (Mathf.Abs(horizontal) >= 0.1f)
         {
-            direction.x = horizontal * speed;
+            direction.x = horizontal * speed * remappedSize;
             distanceCovered.value = -slimeLossMultiplier * Mathf.Abs(currentPos - lastPos);
             MovementEvent.Invoke();
             slimeAnimator.SetBool("isWalking", true);
@@ -61,17 +81,32 @@ public class SlimeMovement : MonoBehaviour
         if (vertical >= jumpThreshold && playerController.isGrounded)
         {
             //jump strength should be proportional to size of slime
-            direction.y = jumpStrength * size;
+            direction.y = jumpStrength * remappedSize;
             //Take a chunk of size off for jumping
             JumpEvent.Invoke();
+            isJumping = true;
         }
 
         if (!playerController.isGrounded)
         {
-            direction.y += gravity * Mathf.Clamp(size, 0.2f, 1.5f) * Time.deltaTime;
+            airTime += Time.deltaTime;
+            direction.y += gravity *remappedSize * Time.deltaTime;
             direction.y = Mathf.Clamp(direction.y, maxGravity, Single.PositiveInfinity);
         }
+        //make sure we've fallen at least a little
+        if (airTime >= fallThreshhold && direction.y <= 0)
+        {
+            isFalling = true;
+        }
+
+        if (direction.y <= 0)
+        {
+            isJumping = false;
+        }
+        slimeAnimator.SetBool("isJumping", isJumping);
+        slimeAnimator.SetBool("isFalling", isFalling);
         playerController.Move(direction * Time.deltaTime);
+        
         
         
         lastPos = currentPos;
