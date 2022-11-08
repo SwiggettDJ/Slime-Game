@@ -1,11 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityBehavior : MonoBehaviour
+public class EntityBehaviour : MonoBehaviour
 {
     protected float size;
-    protected float startSize = 1;
+    protected float startSize;
+    protected Vector3 startPos;
+
+    protected virtual void Start()
+    {
+        startPos = transform.position;
+        startSize = transform.localScale.x;
+    }
+
     public void ResetSize()
     {
         size = startSize;
@@ -30,5 +39,16 @@ public class EntityBehavior : MonoBehaviour
     public float GetSize()
     {
         return size;
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    public void FullReset()
+    {
+        GetComponent<CharacterController>().transform.position = startPos;
+        ResetSize();
     }
 }

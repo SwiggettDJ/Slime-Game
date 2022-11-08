@@ -3,17 +3,20 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CharacterController))]
-public class SlimeSize : EntityBehavior
+public class SlimeSize : EntityBehaviour
 {
     private CharacterController controller;
     private ParticleSystem slimeEffect;
+    private Animator slimeAnimator;
 
     public UnityEvent DeathEvent;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         controller = GetComponent<CharacterController>();
         slimeEffect = GetComponentInChildren<ParticleSystem>();
+        slimeAnimator = GetComponentInChildren<Animator>();
         ResetSize();
     }
 
@@ -26,22 +29,24 @@ public class SlimeSize : EntityBehavior
         }
     }
 
-    private void CompareSize(EntityBehavior other)
+    private void CompareSize(EntityBehaviour other)
     {
         float otherSize = other.GetSize();
         if (size > otherSize)
         {
             AddSize(otherSize/2);
-            print("Added " + otherSize + "\n");
+            slimeAnimator.SetTrigger("Growth");
+            //other.Death();
         }
         else
         {
-            print("too big \n");
+            AddSize(-otherSize/4);
+            slimeAnimator.SetTrigger("Shrink");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        CompareSize(other.GetComponent<EntityBehavior>());
+        CompareSize(other.GetComponent<EntityBehaviour>());
     }
 }

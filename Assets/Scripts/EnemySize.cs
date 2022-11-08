@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySize : EntityBehavior
+public class EnemySize : EntityBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        startSize = .5f;
+        base.Start();
         ResetSize();
     }
 }
