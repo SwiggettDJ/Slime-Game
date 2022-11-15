@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class SlimeMovement : MonoBehaviour
 {
     private CharacterController playerController;
     public Joystick joystick;
+
     public float speed = 6f;
     public float gravity = -10f;
     private float slimeLossMultiplier;
@@ -17,8 +19,10 @@ public class SlimeMovement : MonoBehaviour
     private Animator slimeAnimator;
     private bool isFalling = false;
     private float airTime = 0f;
-    private float fallThreshhold = 0.2f;
+    private float fallThreshhold = 0.1f;
     private bool isJumping = false;
+    private float remappedSize;
+    public bool jumpButton { get; set; }
 
     private float lastPos;
     private float currentPos;
@@ -49,7 +53,7 @@ public class SlimeMovement : MonoBehaviour
         float vertical = joystick.Vertical;
         float size = transform.localScale.y;
         
-        float remappedSize = Remap(size, 0f, 2f, .5f, 1.5f);
+        remappedSize = Remap(size, 0f, 2f, .5f, 1.5f);
 
         if (playerController.isGrounded)
         {
@@ -78,13 +82,9 @@ public class SlimeMovement : MonoBehaviour
             direction.x = 0;
             slimeAnimator.SetBool("isWalking", false);
         }
-        if (vertical >= jumpThreshold && playerController.isGrounded)
+        if (vertical >= jumpThreshold || jumpButton)
         {
-            //jump strength should be proportional to size of slime
-            direction.y = jumpStrength * remappedSize;
-            //Take a chunk of size off for jumping
-            JumpEvent.Invoke();
-            isJumping = true;
+            Jump();
         }
 
         if (!playerController.isGrounded)
@@ -97,6 +97,7 @@ public class SlimeMovement : MonoBehaviour
         if (airTime >= fallThreshhold && direction.y <= 0)
         {
             isFalling = true;
+            jumpButton = false;
         }
 
         if (direction.y <= 0)
@@ -110,5 +111,18 @@ public class SlimeMovement : MonoBehaviour
         
         
         lastPos = currentPos;
+    }
+
+    public void Jump()
+    {
+        if (playerController.isGrounded)
+        {
+            //jump strength should be proportional to size of slime
+            direction.y = jumpStrength * remappedSize;
+            //Take a chunk of size off for jumping
+            JumpEvent.Invoke();
+            isJumping = true;   
+            jumpButton = false;
+        }
     }
 }
