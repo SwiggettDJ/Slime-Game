@@ -17,11 +17,15 @@ public class SlimeMovement : MonoBehaviour
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
     private Animator slimeAnimator;
-    private bool isFalling = false;
-    private float airTime = 0f;
-    private float fallThreshhold = 0.1f;
-    private bool isJumping = false;
+    private bool isFalling;
+    private float airTime;
+    private float fallThreshhold = 0.15f;
+    private bool isJumping;
     private float remappedSize;
+    
+    private float knockBackAmount = 5f;
+    private float knockBackTracker;
+    private float knockBackDirection;
     public bool jumpButton { get; set; }
 
     private float lastPos;
@@ -70,7 +74,7 @@ public class SlimeMovement : MonoBehaviour
         if (horizontal < 0) FacingLeftEvent.Invoke();
         else if(horizontal > 0) FacingRightEvent.Invoke();
         
-        if (Mathf.Abs(horizontal) >= 0.1f)
+        if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
             direction.x = horizontal * speed * remappedSize;
             distanceCovered.value = -slimeLossMultiplier * Mathf.Abs(currentPos - lastPos);
@@ -79,9 +83,18 @@ public class SlimeMovement : MonoBehaviour
         }
         else
         {
-            direction.x = 0;
             slimeAnimator.SetBool("isWalking", false);
         }
+        
+        if (direction.x != 0)
+        {
+            direction.x += Math.Sign(direction.x) * -10 * Time.deltaTime;
+        }
+        if (Mathf.Abs(direction.x) < 0.5)
+        {
+            knockBackDirection = 0;
+        }
+        
         if (vertical >= jumpThreshold || jumpButton)
         {
             Jump();
@@ -104,12 +117,13 @@ public class SlimeMovement : MonoBehaviour
         {
             isJumping = false;
         }
+
         slimeAnimator.SetBool("isJumping", isJumping);
         slimeAnimator.SetBool("isFalling", isFalling);
         playerController.Move(direction * Time.deltaTime);
-        
-        
-        
+
+
+
         lastPos = currentPos;
     }
 
@@ -123,6 +137,19 @@ public class SlimeMovement : MonoBehaviour
             JumpEvent.Invoke();
             isJumping = true;   
             jumpButton = false;
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<EntityBehaviour>())
+        {
+            if (transform.localPosition.x <= other.transform.localPosition.x)
+            {
+                knockBackDirection = -1;
+            }
+            else knockBackDirection = 1;;
+            direction.x = knockBackAmount * knockBackDirection;
         }
     }
 }
