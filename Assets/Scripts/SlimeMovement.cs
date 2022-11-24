@@ -140,16 +140,14 @@ public class SlimeMovement : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter(Collider other)
+    public void KnockBack(EntityBehaviour other)
     {
-        if (other.GetComponent<EntityBehaviour>())
+        if (transform.localPosition.x <= other.transform.localPosition.x)
         {
-            if (transform.localPosition.x <= other.transform.localPosition.x)
-            {
-                knockBackDirection = -1;
-            }
-            else knockBackDirection = 1;;
-            direction.x = knockBackAmount * knockBackDirection;
+            knockBackDirection = -1;
         }
+        else knockBackDirection = 1;
+        
+        direction.x = knockBackAmount * knockBackDirection;
     }
 }

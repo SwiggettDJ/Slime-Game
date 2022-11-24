@@ -22,10 +22,13 @@ public class SlimeSize : EntityBehaviour
 
     protected override void UpdateSize()
     {
-        base.UpdateSize();
         if (size <= 0)
         {
             DeathEvent.Invoke();
+        }
+        else
+        {
+            base.UpdateSize();
         }
     }
 
@@ -40,13 +43,27 @@ public class SlimeSize : EntityBehaviour
         }
         else
         {
+            JumpAttack(other.transform.position);
             AddSize(-otherSize/4);
             slimeAnimator.SetTrigger("Shrink");
+            GetComponent<SlimeMovement>().KnockBack(other);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         CompareSize(other.GetComponent<EntityBehaviour>());
+    }
+
+    private void JumpAttack(Vector3 enemyLoc)
+    {
+        if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling"))
+        {
+            //is the bottom of slime higher than enemy center
+            if (transform.position.y - size / 2 > enemyLoc.y)
+            {
+                print("JumpedOn");
+            }
+        }
     }
 }
