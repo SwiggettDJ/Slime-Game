@@ -13,7 +13,7 @@ public class SlimeMovement : MonoBehaviour
     public float gravity = -10f;
     private float slimeLossMultiplier;
     private float maxGravity = -15f;
-    public float jumpStrength = 5f;
+    public float jumpDefault = 5f;
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
     private Animator slimeAnimator;
@@ -95,9 +95,9 @@ public class SlimeMovement : MonoBehaviour
             knockBackDirection = 0;
         }
         
-        if (vertical >= jumpThreshold || jumpButton)
+        if ((vertical >= jumpThreshold || jumpButton) && playerController.isGrounded)
         {
-            Jump();
+            Jump(0);
         }
 
         if (!playerController.isGrounded)
@@ -127,17 +127,15 @@ public class SlimeMovement : MonoBehaviour
         lastPos = currentPos;
     }
 
-    public void Jump()
+    public void Jump(float jumpAmount)
     {
-        if (playerController.isGrounded)
-        {
-            //jump strength should be proportional to size of slime
-            direction.y = jumpStrength * remappedSize;
-            //Take a chunk of size off for jumping
-            JumpEvent.Invoke();
-            isJumping = true;   
-            jumpButton = false;
-        }
+        if (jumpAmount == 0) jumpAmount = jumpDefault;
+        //jump strength should be proportional to size of slime
+        direction.y = jumpAmount * remappedSize;
+        //Take a chunk of size off for jumping
+        JumpEvent.Invoke();
+        isJumping = true;   
+        jumpButton = false;
     }
     
     public void KnockBack(EntityBehaviour other)
@@ -148,6 +146,6 @@ public class SlimeMovement : MonoBehaviour
         }
         else knockBackDirection = 1;
         
-        direction.x = knockBackAmount * knockBackDirection;
+        direction.x = knockBackAmount * knockBackDirection * remappedSize;
     }
 }

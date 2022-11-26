@@ -43,10 +43,11 @@ public class SlimeSize : EntityBehaviour
         }
         else
         {
-            JumpAttack(other.transform.position);
+            JumpAttack(other);
             AddSize(-otherSize/4);
             slimeAnimator.SetTrigger("Shrink");
             GetComponent<SlimeMovement>().KnockBack(other);
+            GetComponent<SlimeMovement>().Jump(2);
         }
     }
 
@@ -55,14 +56,15 @@ public class SlimeSize : EntityBehaviour
         CompareSize(other.GetComponent<EntityBehaviour>());
     }
 
-    private void JumpAttack(Vector3 enemyLoc)
+    private void JumpAttack(EntityBehaviour other)
     {
         if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling"))
         {
             //is the bottom of slime higher than enemy center
-            if (transform.position.y - size / 2 > enemyLoc.y)
+            if (transform.position.y - size / 2 > other.transform.position.y)
             {
-                print("JumpedOn");
+                ParticleSystem ps = other.GetComponentInChildren<ParticleSystem>();
+                ps.Emit(10);
             }
         }
     }
