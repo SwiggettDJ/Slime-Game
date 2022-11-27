@@ -10,4 +10,5 @@ public class EnemySize : EntityBehaviour
         base.Start();
         ResetSize();
     }
+
 }

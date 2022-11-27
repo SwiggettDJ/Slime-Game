@@ -39,33 +39,27 @@ public class SlimeSize : EntityBehaviour
         {
             AddSize(otherSize/2);
             slimeAnimator.SetTrigger("Growth");
-            //other.Death();
+            other.Death();
         }
         else
         {
-            JumpAttack(other);
-            AddSize(-otherSize/4);
-            slimeAnimator.SetTrigger("Shrink");
+            if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling") && (transform.position.y - (size / 3) > other.transform.position.y))
+            {
+                ParticleSystem ps = other.GetComponentInChildren<ParticleSystem>();
+                ps.Emit((int)Mathf.Clamp(size*15, 5, Single.PositiveInfinity));
+                other.AddSize(-size/2);
+            }
+            else
+            {
+                AddSize(-otherSize/4);
+                slimeAnimator.SetTrigger("Shrink");
+            }
             GetComponent<SlimeMovement>().KnockBack(other);
-            GetComponent<SlimeMovement>().Jump(2);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         CompareSize(other.GetComponent<EntityBehaviour>());
-    }
-
-    private void JumpAttack(EntityBehaviour other)
-    {
-        if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling"))
-        {
-            //is the bottom of slime higher than enemy center
-            if (transform.position.y - size / 2 > other.transform.position.y)
-            {
-                ParticleSystem ps = other.GetComponentInChildren<ParticleSystem>();
-                ps.Emit(10);
-            }
-        }
     }
 }

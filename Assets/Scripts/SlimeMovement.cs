@@ -97,7 +97,7 @@ public class SlimeMovement : MonoBehaviour
         
         if ((vertical >= jumpThreshold || jumpButton) && playerController.isGrounded)
         {
-            Jump(0);
+            Jump();
         }
 
         if (!playerController.isGrounded)
@@ -127,16 +127,16 @@ public class SlimeMovement : MonoBehaviour
         lastPos = currentPos;
     }
 
-    public void Jump(float jumpAmount)
+    public void Jump()
     {
-        if (jumpAmount == 0) jumpAmount = jumpDefault;
         //jump strength should be proportional to size of slime
-        direction.y = jumpAmount * remappedSize;
+        direction.y = jumpDefault * remappedSize;
         //Take a chunk of size off for jumping
         JumpEvent.Invoke();
         isJumping = true;   
         jumpButton = false;
     }
+    
     
     public void KnockBack(EntityBehaviour other)
     {
@@ -147,5 +147,6 @@ public class SlimeMovement : MonoBehaviour
         else knockBackDirection = 1;
         
         direction.x = knockBackAmount * knockBackDirection * remappedSize;
+        direction.y = 2 * remappedSize;
     }
 }
