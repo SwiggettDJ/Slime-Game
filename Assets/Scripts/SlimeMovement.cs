@@ -11,7 +11,6 @@ public class SlimeMovement : MonoBehaviour
 
     public float speed = 6f;
     public float gravity = -10f;
-    private float slimeLossMultiplier;
     private float maxGravity = -15f;
     public float jumpDefault = 5f;
     private float jumpThreshold = 0.2f;
@@ -36,7 +35,6 @@ public class SlimeMovement : MonoBehaviour
 
     private void Start()
     {
-        slimeLossMultiplier = 0.02f;
         playerController = GetComponent<CharacterController>();
         lastPos = currentPos = transform.position.x;
         distanceCovered.value = 0;
@@ -77,7 +75,7 @@ public class SlimeMovement : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
             direction.x = horizontal * speed * remappedSize;
-            distanceCovered.value = -slimeLossMultiplier * Mathf.Abs(currentPos - lastPos);
+            distanceCovered.value = -(Time.deltaTime* 10 * Mathf.Abs(currentPos - lastPos) + size*.0001f);
             MovementEvent.Invoke();
             slimeAnimator.SetBool("isWalking", true);
         }

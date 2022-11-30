@@ -26,7 +26,6 @@ public class EnemyAIBehaviour : MonoBehaviour
         {
             direction.y = 0;
         }
-
         enemyController.Move(direction * Time.deltaTime);
-    }
+    }   
 }

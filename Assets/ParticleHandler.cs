@@ -8,9 +8,12 @@ public class ParticleHandler : MonoBehaviour
 {
     private ParticleSystem ps;
     public UnityEvent ParticleTriggerEvent;
+    private ParticleSystem.ExternalForcesModule externalForcesModule;
     private void Start()
     {
         ps = GetComponent<ParticleSystem>();
+        externalForcesModule = ps.externalForces;
+        externalForcesModule.enabled = false;
     }
 
     private void OnParticleTrigger()
@@ -22,6 +25,15 @@ public class ParticleHandler : MonoBehaviour
         for (int i = 0; i < numEnter; i++)
         {
             ParticleTriggerEvent.Invoke();
+        }
+    }
+
+    public IEnumerator EnableForces()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (this)
+        {
+            externalForcesModule.enabled = true;
         }
     }
 }

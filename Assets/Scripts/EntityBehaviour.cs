@@ -8,11 +8,13 @@ public class EntityBehaviour : MonoBehaviour
     protected float size;
     protected float startSize;
     protected Vector3 startPos;
+    private Animator entityAnimator;
 
     protected virtual void Start()
     {
         startPos = transform.position;
         startSize = transform.localScale.x;
+        entityAnimator = GetComponentInChildren<Animator>();
     }
 
     public void ResetSize()
@@ -50,5 +52,16 @@ public class EntityBehaviour : MonoBehaviour
     {
         GetComponent<CharacterController>().transform.position = startPos;
         ResetSize();
+    }
+    
+    protected bool CompareSize(EntityBehaviour other)
+    {
+        if (size > other.GetSize())
+        {
+            AddSize(other.size/2);
+            entityAnimator.SetTrigger("Growth");
+            return true;
+        }
+        else return false;
     }
 }

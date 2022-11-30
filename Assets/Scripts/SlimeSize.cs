@@ -32,34 +32,29 @@ public class SlimeSize : EntityBehaviour
         }
     }
 
-    private void CompareSize(EntityBehaviour other)
+    private void OnTriggerEnter(Collider other)
     {
-        float otherSize = other.GetSize();
-        if (size > otherSize)
+        if (other.GetComponent<EnemySize>())
         {
-            AddSize(otherSize/2);
-            slimeAnimator.SetTrigger("Growth");
-            other.Death();
-        }
-        else
-        {
-            if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling") && (transform.position.y - (size / 3) > other.transform.position.y))
+            EnemySize enemy = other.GetComponent<EnemySize>();
+            float enemySize = enemy.GetSize();
+            if (CompareSize(enemy))
             {
-                ParticleSystem ps = other.GetComponentInChildren<ParticleSystem>();
-                ps.Emit((int)Mathf.Clamp(size*15, 5, Single.PositiveInfinity));
-                other.AddSize(-size/2);
+                enemy.Death();
             }
             else
             {
-                AddSize(-otherSize/4);
-                slimeAnimator.SetTrigger("Shrink");
+                if (slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling") && (transform.position.y > enemy.transform.position.y))
+                {
+                    enemy.Damaged();
+                }
+                else
+                {
+                    AddSize(-enemySize/4);
+                    slimeAnimator.SetTrigger("Shrink");
+                }
+                GetComponent<SlimeMovement>().KnockBack(enemy);
             }
-            GetComponent<SlimeMovement>().KnockBack(other);
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        CompareSize(other.GetComponent<EntityBehaviour>());
     }
 }
