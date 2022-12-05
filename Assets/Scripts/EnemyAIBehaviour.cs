@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAIBehaviour : MonoBehaviour
@@ -6,6 +7,8 @@ public class EnemyAIBehaviour : MonoBehaviour
     private CharacterController enemyController;
 
     private float gravity = -10f;
+    private float speed = 6f;
+    public float movementRange = 2f;
     
     private Vector3 direction;
     // Start is called before the first frame update
@@ -26,6 +29,13 @@ public class EnemyAIBehaviour : MonoBehaviour
         {
             direction.y = 0;
         }
+        
+        
         enemyController.Move(direction * Time.deltaTime);
     }   
+    
+    private IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
 }
