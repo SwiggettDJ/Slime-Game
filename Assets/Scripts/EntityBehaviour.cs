@@ -9,6 +9,7 @@ public class EntityBehaviour : MonoBehaviour
     protected float startSize;
     protected Vector3 startPos;
     private Animator entityAnimator;
+    protected float growthMultiplier = 1f;
 
     protected virtual void Start()
     {
@@ -28,8 +29,11 @@ public class EntityBehaviour : MonoBehaviour
     }
     public void AddSize(float delta)
     {
+        if (delta > 0)
+        {
+            delta*=growthMultiplier;
+        }
         size += delta;
-        
         UpdateSize();
     }
     public void AddSize(FloatData delta)
