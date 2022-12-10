@@ -21,10 +21,10 @@ public class CameraDistanceBehaviour : MonoBehaviour
     void Update()
     {
         CinemachineFramingTransposer transposer = componentBase as CinemachineFramingTransposer;
-        targetSize = cam.Follow.localScale.x * 5;
-        float remappedSize = Remap(targetSize, 0, 10, 2, 7);
+        targetSize = cam.Follow.localScale.x;
+        float remappedSize = Remap(targetSize, 0, 5, 2, 16);
         transposer.m_CameraDistance = Mathf.Lerp(transposer.m_CameraDistance, remappedSize, .5f);
-        transposer.m_TrackedObjectOffset.y = Remap(targetSize, 0,10,0,-0.96f);
+        //transposer.m_TrackedObjectOffset.y = Remap(targetSize, 0,10,0,-0.96f);
     }
     
     private float Remap(float value, float inMin, float inMax, float outMin, float outMax)

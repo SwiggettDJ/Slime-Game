@@ -22,6 +22,8 @@ public class SlimeSize : EntityBehaviour
 
     protected override void UpdateSize()
     {
+        if (size > maxGrowth)
+            maxGrowth = size;
         if (size <= 0)
         {
             DeathEvent.Invoke();
@@ -30,9 +32,6 @@ public class SlimeSize : EntityBehaviour
         {
             base.UpdateSize();
         }
-
-        if (size < maxGrowth)
-            maxGrowth = size;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,14 +63,17 @@ public class SlimeSize : EntityBehaviour
         {
             if (other.GetComponent<Jelly>().gameObject.name == "Blue Jelly")
             {
-                print("Got Blue Jelly!");
                 growthMultiplier += .25f;
             }
             if (other.GetComponent<Jelly>().gameObject.name == "Green Jelly")
             {
-                print("Got Green Jelly!");
                 greenMutation = true;
             }
+        }
+
+        if (other.CompareTag("Death"))
+        {
+            DeathEvent.Invoke();
         }
     }
 

@@ -108,7 +108,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 0
+  scalingMode: 1
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -286,7 +286,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.1
-      minScalar: 0.4
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1423,7 +1423,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     mode: 1
-    timeMode: 2
+    timeMode: 0
     fps: 4
     frameOverTime:
       serializedVersion: 2
@@ -1540,13 +1540,11 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -906352419676791157, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 7876596100482746423, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 900910832426561790, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 6099975321967368066, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 2393797111024307884, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 2393797111024307884, guid: a0611cba013103247b971f50326c734b, type: 3}
-    - sprite: {fileID: 2393797111024307884, guid: a0611cba013103247b971f50326c734b, type: 3}
+    - sprite: {fileID: -1377728340925619101, guid: 65b28f69ea0b14147bed4bda36a4f095, type: 3}
+    - sprite: {fileID: -496964135290186270, guid: 65b28f69ea0b14147bed4bda36a4f095, type: 3}
+    - sprite: {fileID: 5072389880570651731, guid: 65b28f69ea0b14147bed4bda36a4f095, type: 3}
+    - sprite: {fileID: -1061262578974684857, guid: 65b28f69ea0b14147bed4bda36a4f095, type: 3}
+    - sprite: {fileID: -8862337324227534134, guid: 65b28f69ea0b14147bed4bda36a4f095, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -3742,7 +3740,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4896,7 +4894,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.02
+          m_FloatArgument: 0.05
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -4912,6 +4910,7 @@ GameObject:
   - component: {fileID: 7403551345362623818}
   - component: {fileID: 7403551345362623821}
   - component: {fileID: 1941705152351668140}
+  - component: {fileID: 632913867}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4928,7 +4927,7 @@ Transform:
   m_GameObject: {fileID: 7403551345362623816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.64, y: 1.228, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 7403551346404127184}
   - {fileID: 384069016}
@@ -4972,6 +4971,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b3c4e3312bf69488b80088c8ac7b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementRange: 2
+--- !u!143 &632913867
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403551345362623816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.1
+  m_Radius: 0.1
+  m_SlopeLimit: 45
+  m_StepOffset: 0.01
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1 &7403551346404127183
 GameObject:
   m_ObjectHideFlags: 0

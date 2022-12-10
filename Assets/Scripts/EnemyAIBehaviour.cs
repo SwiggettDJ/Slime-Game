@@ -51,6 +51,16 @@ public class EnemyAIBehaviour : MonoBehaviour
         }
         
         enemyController.Move(direction * Time.deltaTime);
+        if (direction.x < 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
+
+        if (direction.x > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
+        
         if (Mathf.Abs(direction.x) > 0)
         {
             direction.x += Math.Sign(direction.x) * -1 * Time.deltaTime;

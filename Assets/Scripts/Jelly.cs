@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Jelly : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
