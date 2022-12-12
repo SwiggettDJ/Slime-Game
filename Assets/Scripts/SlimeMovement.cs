@@ -16,7 +16,8 @@ public class SlimeMovement : MonoBehaviour
     private float jumpThreshold = 0.2f;
     private Vector3 direction;
     private Animator slimeAnimator;
-    private bool isFalling;
+    //start is as true so when you spawn in he slooshes
+    private bool isFalling = true;
     private float airTime;
     private float fallThreshhold = 0.15f;
     private bool isJumping;
@@ -55,7 +56,7 @@ public class SlimeMovement : MonoBehaviour
         float vertical = joystick.Vertical;
         float size = transform.localScale.y;
         
-        remappedSize = Remap(size, 0f, 2f, .5f, 1.5f);
+        remappedSize = Remap(size, 0f, 6f, .5f, 3f);
 
         if (playerController.isGrounded)
         {
