@@ -66,7 +66,7 @@ TextureImporter:
       213: 3037725079318988644
     second: Slime Walk_20
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -83,10 +83,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -125,6 +127,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -164,6 +168,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -628,9 +644,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Slime Walk_2: -3732011588105439628
+      Slime Walk_6: 1583538506986286769
+      Slime Walk_1: -2742798160252916799
+      Slime Walk_16: -4152487496086413762
+      Slime Walk_0: -4327756533437189935
+      Slime Walk_8: 5236737718942187285
+      Slime Walk_3: -7908686302172708571
+      Slime Walk_11: 1843089099799566392
+      Slime Walk_19: -7085335351035626252
+      Slime Walk_20: 3037725079318988644
+      Slime Walk_15: 1851986769047991978
+      Slime Walk_17: -2546427135061447613
+      Slime Walk_12: -1156399629054944801
+      Slime Walk_14: 7318590523523957537
+      Slime Walk_13: 4657566596954109883
+      Slime Walk_10: 4841712220458225274
+      Slime Walk_18: -3215871009586601517
+      Slime Walk_4: 3773042111073645801
+      Slime Walk_9: -869321363014983269
+      Slime Walk_7: -1530206744161305090
+      Slime Walk_5: 3491615123300594767
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
