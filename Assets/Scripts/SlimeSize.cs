@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +15,7 @@ public class SlimeSize : EntityBehaviour
     private float maxGrowth;
 
     private float lastSize;
+    public TextMeshProUGUI sizeLossText;
     
 
     protected override void Start()
@@ -100,7 +103,7 @@ public class SlimeSize : EntityBehaviour
 
     private IEnumerator CheckSizeChange()
     {
-        print(size - lastSize);
+        sizeLossText.text = System.Math.Round((size - lastSize)*10, 2).ToString();
         lastSize = size;
         yield return new WaitForSeconds(.5f);
         StartCoroutine(CheckSizeChange());

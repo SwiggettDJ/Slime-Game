@@ -76,7 +76,7 @@ public class SlimeMovement : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
             direction.x = horizontal * speed * remappedSize;
-            distanceCovered.value = -(Mathf.Abs(currentPos - lastPos) + size)*.001f;
+            distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)*20f + size/1000)*Time.deltaTime;
             MovementEvent.Invoke();
             slimeAnimator.SetBool("isWalking", true);
         }
