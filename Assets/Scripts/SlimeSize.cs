@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,8 @@ public class SlimeSize : EntityBehaviour
     private bool greenMutation;
     private bool regenerating;
     private float maxGrowth;
+
+    private float lastSize;
     
 
     protected override void Start()
@@ -18,6 +21,8 @@ public class SlimeSize : EntityBehaviour
         slimeAnimator = GetComponentInChildren<Animator>();
         ResetSize();
         maxGrowth = size;
+        lastSize = size;
+        StartCoroutine(CheckSizeChange());
     }
 
     protected override void UpdateSize()
@@ -90,6 +95,15 @@ public class SlimeSize : EntityBehaviour
             AddSize(Time.deltaTime/10);
         }
         else regenerating = false;
+
+    }
+
+    private IEnumerator CheckSizeChange()
+    {
+        print(size - lastSize);
+        lastSize = size;
+        yield return new WaitForSeconds(.5f);
+        StartCoroutine(CheckSizeChange());
     }
 
     public void Regenerate(bool condition)

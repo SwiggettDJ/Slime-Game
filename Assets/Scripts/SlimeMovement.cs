@@ -87,11 +87,12 @@ public class SlimeMovement : MonoBehaviour
         
         if (direction.x != 0)
         {
-            direction.x += Math.Sign(direction.x) * -10 * Time.deltaTime;
+            direction.x += Math.Sign(direction.x) * -5 * Time.deltaTime - Math.Sign(direction.x)* size*2*Time.deltaTime;
         }
-        if (Mathf.Abs(direction.x) < 0.5)
+        if (Mathf.Abs(direction.x) < 0.25)
         {
             knockBackDirection = 0;
+            direction.x = 0;
         }
         
         if ((vertical >= jumpThreshold || jumpButton) && playerController.isGrounded)
