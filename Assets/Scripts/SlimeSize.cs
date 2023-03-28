@@ -13,8 +13,7 @@ public class SlimeSize : EntityBehaviour
     private float maxGrowth;
 
     private float lastSize;
-    public TextMeshProUGUI sizeLossText;
-    
+
 
     protected override void Start()
     {
@@ -23,7 +22,6 @@ public class SlimeSize : EntityBehaviour
         ResetSize();
         maxGrowth = size;
         lastSize = size;
-        StartCoroutine(CheckSizeChange());
     }
 
     protected override void UpdateSize()
@@ -97,14 +95,6 @@ public class SlimeSize : EntityBehaviour
         }
         else regenerating = false;
 
-    }
-
-    private IEnumerator CheckSizeChange()
-    {
-        sizeLossText.text = System.Math.Round((size - lastSize)*10, 2).ToString();
-        lastSize = size;
-        yield return new WaitForSeconds(.5f);
-        StartCoroutine(CheckSizeChange());
     }
 
     public void Regenerate(bool condition)
