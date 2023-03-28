@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -34,16 +35,16 @@ public class SlimeMovement : MonoBehaviour
 
     public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent;
 
-    void Awake () {
-        QualitySettings.vSyncCount = 0;  // VSync must be disabled
-        Application.targetFrameRate = 30;
-    }
+    private WaitForSeconds resizeDelay;
+    
     private void Start()
     {
         playerController = GetComponent<CharacterController>();
         lastPos = currentPos = transform.position.x;
         distanceCovered.value = 0;
         slimeAnimator = GetComponentInChildren<Animator>();
+        resizeDelay = new WaitForSeconds(0.05f);
+        StartCoroutine(SizeChangeLoop());
     }
 
     //Why does mathF not have a remap??
@@ -55,7 +56,6 @@ public class SlimeMovement : MonoBehaviour
 
     void Update()
     {
-        currentPos = transform.position.x;
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
         float size = transform.localScale.y;
@@ -80,8 +80,8 @@ public class SlimeMovement : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
             direction.x = horizontal * speed * remappedSize;
-            distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)*20f + size/1000)*Time.deltaTime;
-            MovementEvent.Invoke();
+            // distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)*20f + size/1000)*Time.deltaTime;
+            // MovementEvent.Invoke();
             slimeAnimator.SetBool("isWalking", true);
         }
         else
@@ -137,7 +137,19 @@ public class SlimeMovement : MonoBehaviour
 
 
 
+        
+    }
+
+    private IEnumerator SizeChangeLoop()
+    {
+        currentPos = transform.position.x;
+        float size = transform.localScale.y;
+        yield return resizeDelay;
+        
+        distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)/10);
+        MovementEvent.Invoke();
         lastPos = currentPos;
+        StartCoroutine(SizeChangeLoop());
     }
 
     public void Jump()
