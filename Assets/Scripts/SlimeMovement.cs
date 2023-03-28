@@ -34,6 +34,10 @@ public class SlimeMovement : MonoBehaviour
 
     public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent;
 
+    void Awake () {
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 30;
+    }
     private void Start()
     {
         playerController = GetComponent<CharacterController>();
