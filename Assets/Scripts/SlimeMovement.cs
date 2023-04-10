@@ -135,7 +135,7 @@ public class SlimeMovement : MonoBehaviour
         slimeAnimator.SetBool("isFalling", isFalling);
         playerController.Move(direction * Time.deltaTime);
 
-
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         
     }
