@@ -20,7 +20,7 @@ public class EnemySize : EntityBehaviour
     public void Damaged()
     {
         StartCoroutine(GetComponentInChildren<ParticleHandler>().EnableForces());
-        ps.Emit((int)Mathf.Clamp(size*10, 5, Single.PositiveInfinity));
+        ps.Emit((int)Mathf.Clamp(size*10, 10, Single.PositiveInfinity));
         AddSize(-size/3);
         enemyAnimator.SetTrigger("Shrink");
     }
