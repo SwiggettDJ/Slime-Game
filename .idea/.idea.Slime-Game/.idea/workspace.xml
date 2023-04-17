@@ -7,9 +7,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/RandomizeSprite.cs" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -83,7 +80,7 @@
       <workItem from="1675707680994" duration="3408000" />
       <workItem from="1679328082090" duration="1607000" />
       <workItem from="1679932463598" duration="2372000" />
-      <workItem from="1680543192230" duration="7630000" />
+      <workItem from="1680543192230" duration="8916000" />
     </task>
     <servers />
   </component>

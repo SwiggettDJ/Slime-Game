@@ -20,7 +20,7 @@ public class SlimeMovement : MonoBehaviour
     //start is as true so when you spawn in he slooshes
     private bool isFalling = true;
     private float airTime;
-    private float fallThreshhold = 0.15f;
+    private float fallThreshhold = 0.2f;
     private bool isJumping;
     private float remappedSize;
     
@@ -99,7 +99,8 @@ public class SlimeMovement : MonoBehaviour
             direction.x = 0;
         }
         
-        if ((vertical >= jumpThreshold || jumpButton) && playerController.isGrounded)
+        // air time used to for coyote time
+        if ((vertical >= jumpThreshold || jumpButton) && airTime <= fallThreshhold && direction.y <= 0)
         {
             Jump();
         }
