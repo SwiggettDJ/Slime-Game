@@ -50,7 +50,7 @@ public class SlimeSize : EntityBehaviour
             }
             else
             {
-                if ((slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling")) && transform.position.y > enemy.transform.position.y)
+                if ((slimeAnimator.GetBool("isJumping") || slimeAnimator.GetBool("isFalling")) && transform.position.y > enemy.transform.position.y - enemySize/20)
                 {
                     enemy.Damaged();
                 }

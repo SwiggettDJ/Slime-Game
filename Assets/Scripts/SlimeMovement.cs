@@ -148,7 +148,7 @@ public class SlimeMovement : MonoBehaviour
         yield return resizeDelay;
 
         float positionDelta = Mathf.Abs(currentPos - lastPos);
-        distanceCovered.value = -(positionDelta/40 + size*positionDelta/100);
+        distanceCovered.value = -(positionDelta/50 + size*positionDelta/100);
         MovementEvent.Invoke();
         lastPos = currentPos;
         StartCoroutine(SizeChangeLoop());

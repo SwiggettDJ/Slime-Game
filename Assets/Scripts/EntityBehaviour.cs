@@ -14,7 +14,7 @@ public class EntityBehaviour : MonoBehaviour
     protected virtual void Start()
     {
         startPos = transform.position;
-        startSize = transform.localScale.x;
+        size = startSize = transform.localScale.x;
         entityAnimator = GetComponentInChildren<Animator>();
     }
 
