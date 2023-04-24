@@ -36,6 +36,7 @@ public class SlimeMovement : MonoBehaviour
     public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent;
 
     private WaitForSeconds resizeDelay;
+    private WaitForSeconds knockbackTime;
     
     private void Start()
     {
@@ -44,7 +45,9 @@ public class SlimeMovement : MonoBehaviour
         distanceCovered.value = 0;
         slimeAnimator = GetComponentInChildren<Animator>();
         resizeDelay = new WaitForSeconds(0.05f);
+        knockbackTime = new WaitForSeconds(.25f);
         StartCoroutine(SizeChangeLoop());
+        knockBackDirection = 0;
     }
 
     //Why does mathF not have a remap??
@@ -79,7 +82,19 @@ public class SlimeMovement : MonoBehaviour
         
         if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
-            direction.x = horizontal * speed * remappedSize;
+            //direction.x = horizontal * speed * remappedSize;
+            if (airTime >= fallThreshhold)
+            {
+                direction.x = Mathf.Lerp(direction.x, Math.Sign(horizontal) * speed * remappedSize, .0125f);
+            }
+            else
+            {
+                direction.x = Mathf.Lerp(direction.x, Math.Sign(horizontal) * speed * remappedSize, .0175f);
+            }
+            
+            //float targetSpeed = Math.Sign(horizontal) * speed * remappedSize;
+            //print("new speed: " + newSpeed);
+            //print("max speed: " + maxSpeed);
             // distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)*20f + size/1000)*Time.deltaTime;
             // MovementEvent.Invoke();
             slimeAnimator.SetBool("isWalking", true);
@@ -89,14 +104,15 @@ public class SlimeMovement : MonoBehaviour
             slimeAnimator.SetBool("isWalking", false);
         }
         
-        if (direction.x != 0)
+        //slows player down;
+        if (horizontal == 0)
         {
             direction.x += Math.Sign(direction.x) * -5 * Time.deltaTime - Math.Sign(direction.x)* size*2*Time.deltaTime;
         }
-        if (Mathf.Abs(direction.x) < 0.25)
+        if (Mathf.Abs(direction.x) < 0.25 && horizontal == 0)
         {
-            knockBackDirection = 0;
             direction.x = 0;
+            
         }
         
         // air time used to for coyote time
@@ -137,7 +153,6 @@ public class SlimeMovement : MonoBehaviour
         playerController.Move(direction * Time.deltaTime);
 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-
         
     }
 
@@ -167,13 +182,19 @@ public class SlimeMovement : MonoBehaviour
     
     public void KnockBack(EntityBehaviour other)
     {
-        if (transform.localPosition.x <= other.transform.localPosition.x)
+        if (transform.position.x < other.transform.position.x)
         {
             knockBackDirection = -1;
         }
         else knockBackDirection = 1;
-        
         direction.x = knockBackAmount * knockBackDirection * remappedSize;
         direction.y = 2 * remappedSize;
+        StartCoroutine(KnockbackCountdown());
+    }
+
+    private IEnumerator KnockbackCountdown()
+    {
+        yield return knockbackTime;
+        knockBackDirection = 0;
     }
 }
