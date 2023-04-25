@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 03cab2ae58a1e423ab97b473a18cd760
+guid: 6e3f2ad4507414a3a92add7c3512e80b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Water Explosion_0
+      name: Clouds (1)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
-        width: 256
-        height: 256
+        y: 400
+        width: 400
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4879ea33e6f2e43cb958876ee81507b5
-      internalID: -816347397
+      spriteID: acb528ed8e2f74c7cae8cd60f0554478
+      internalID: -452737607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water Explosion_1
+      name: Clouds (1)_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
+        x: 400
+        y: 400
+        width: 400
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 547637263f2b54cbbb71d7de0f887175
-      internalID: -2045773491
+      spriteID: 7d89c78def25747fbab00127f2865482
+      internalID: 1894763869
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water Explosion_2
+      name: Clouds (1)_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 400
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70486dbce795743ab96fb2cdf46d6c4a
-      internalID: -65351811
+      spriteID: 299e65763154043408b27a2643036f9a
+      internalID: -1916649643
       vertices: []
       indices: 
       edges: []
@@ -184,7 +184,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0ce1d0334964c42189e428f2a089fe85
+    spriteID: 9b9cea2a9f89d4f519b952e45dfe1c1f
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +192,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Water Explosion_0: -816347397
-      Water Explosion_2: -65351811
-      Water Explosion_1: -2045773491
+      Clouds (1)_0: -452737607
+      Clouds (1)_2: -1916649643
+      Clouds (1)_1: 1894763869
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

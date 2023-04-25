@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a852e0528a154f0cada4da023094bcd
+guid: 587a08758416d482c8bdd378eb97a8c1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -40,7 +40,7 @@ TextureImporter:
     wrapU: 0
     wrapV: 0
     wrapW: 0
-  nPOTScale: 0
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
@@ -119,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Water Droplet_0
+      name: Water Explosion (2)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7262f44623534aac8b50bb09e9188aa
-      internalID: -545001547
+      spriteID: f3f391e28e1d84a9183c51de8469f8c8
+      internalID: -1443805106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water Droplet_1
+      name: Water Explosion (2)_1
       rect:
         serializedVersion: 2
         x: 256
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 405003941afe44466af271c4633836bf
-      internalID: -1696114435
+      spriteID: 0eff84915ce9b4bb2b435fe785a62d84
+      internalID: -699492881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Water Droplet_2
+      name: Water Explosion (2)_2
       rect:
         serializedVersion: 2
         x: 0
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd65fd7e3bba84eee83a6dc0d8e2072e
-      internalID: 813329287
+      spriteID: 5a8e2ee460c2b4e9b85330bf73cfe807
+      internalID: -488141625
       vertices: []
       indices: 
       edges: []
@@ -184,7 +184,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f53ac651cc1364736ba4c22fbac1521e
+    spriteID: 43264be9894ae4df6b9d667082834e37
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +192,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Water Droplet_0: -545001547
-      Water Droplet_1: -1696114435
-      Water Droplet_2: 813329287
+      Water Explosion (2)_0: -1443805106
+      Water Explosion (2)_2: -488141625
+      Water Explosion (2)_1: -699492881
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
