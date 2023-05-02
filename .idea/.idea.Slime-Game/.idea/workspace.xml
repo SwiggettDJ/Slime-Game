@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5e89863-590c-48aa-8058-9351aa3b8f3d" name="Changes" comment="" />
+    <list default="true" id="b5e89863-590c-48aa-8058-9351aa3b8f3d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Slime-Game/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Slime-Game/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Slime-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Slime-Game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/WaterDroplets.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/WaterDroplets.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SlimeMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SlimeMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,6 +88,7 @@
       <workItem from="1679328082090" duration="1607000" />
       <workItem from="1679932463598" duration="2372000" />
       <workItem from="1680543192230" duration="8916000" />
+      <workItem from="1682982911653" duration="1150000" />
     </task>
     <servers />
   </component>

@@ -15,6 +15,7 @@ public class SlimeMovement : MonoBehaviour
     private float maxGravity = -15f;
     public float jumpDefault = 5f;
     private float jumpThreshold = 0.2f;
+    private float moveModifier = 2f;
     private Vector3 direction;
     private Animator slimeAnimator;
     //start is as true so when you spawn in he slooshes
@@ -83,20 +84,11 @@ public class SlimeMovement : MonoBehaviour
         if (Mathf.Abs(horizontal) >= 0.1f && knockBackDirection == 0)
         {
             //direction.x = horizontal * speed * remappedSize;
-            if (airTime >= fallThreshhold)
-            {
-                direction.x = Mathf.Lerp(direction.x, Math.Sign(horizontal) * speed * remappedSize, .0125f);
-            }
-            else
-            {
-                direction.x = Mathf.Lerp(direction.x, Math.Sign(horizontal) * speed * remappedSize, .0175f);
-            }
             
-            //float targetSpeed = Math.Sign(horizontal) * speed * remappedSize;
-            //print("new speed: " + newSpeed);
-            //print("max speed: " + maxSpeed);
-            // distanceCovered.value = -(Mathf.Abs(currentPos - lastPos)*20f + size/1000)*Time.deltaTime;
-            // MovementEvent.Invoke();
+            //Moves player with a dampened effect
+            direction.x = Mathf.Lerp(direction.x, horizontal * speed * remappedSize, moveModifier * Time.deltaTime);
+            
+            
             slimeAnimator.SetBool("isWalking", true);
         }
         else
