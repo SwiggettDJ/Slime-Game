@@ -34,7 +34,7 @@ public class SlimeMovement : MonoBehaviour
     private float currentPos;
     public FloatData distanceCovered;
 
-    public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent;
+    public UnityEvent MovementEvent, FacingRightEvent, FacingLeftEvent, JumpEvent, WalkStartEvent, WalkEndEvent, LandEvent;
 
     private WaitForSeconds resizeDelay;
     private WaitForSeconds knockbackTime;
@@ -71,6 +71,12 @@ public class SlimeMovement : MonoBehaviour
             if (isFalling)
             {
                 slimeAnimator.SetTrigger("Landed");
+                LandEvent.Invoke();
+                
+                if (slimeAnimator.GetBool("isWalking"))
+                {
+                    WalkStartEvent.Invoke();
+                }
             }
             isFalling = false;
             isJumping = false;
@@ -88,12 +94,18 @@ public class SlimeMovement : MonoBehaviour
             //Moves player with a dampened effect
             direction.x = Mathf.Lerp(direction.x, horizontal * speed * remappedSize, moveModifier * Time.deltaTime);
             
-            
+            //On walk start invoke
+            if (!slimeAnimator.GetBool("isWalking"))
+            {
+                WalkStartEvent.Invoke();
+            }
+
             slimeAnimator.SetBool("isWalking", true);
         }
         else
         {
             slimeAnimator.SetBool("isWalking", false);
+            WalkEndEvent.Invoke();
         }
         
         //slows player down;
@@ -124,6 +136,7 @@ public class SlimeMovement : MonoBehaviour
         {
             isFalling = true;
             jumpButton = false;
+            WalkEndEvent.Invoke();
         }
 
         if (direction.y <= 0)
@@ -155,7 +168,7 @@ public class SlimeMovement : MonoBehaviour
         yield return resizeDelay;
 
         float positionDelta = Mathf.Abs(currentPos - lastPos);
-        distanceCovered.value = -(positionDelta/50 + size*positionDelta/100);
+        distanceCovered.value = -(positionDelta/60 + size*positionDelta/100);
         MovementEvent.Invoke();
         lastPos = currentPos;
         StartCoroutine(SizeChangeLoop());
@@ -182,6 +195,7 @@ public class SlimeMovement : MonoBehaviour
         direction.x = knockBackAmount * knockBackDirection * remappedSize;
         direction.y = 2 * remappedSize;
         StartCoroutine(KnockbackCountdown());
+        LandEvent.Invoke();
     }
 
     private IEnumerator KnockbackCountdown()

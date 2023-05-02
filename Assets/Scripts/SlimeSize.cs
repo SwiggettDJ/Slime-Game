@@ -84,14 +84,15 @@ public class SlimeSize : EntityBehaviour
     private void Update()
     {
         float diff = maxGrowth - size;
-        if (diff > .05f)
+        float lossLimit = maxGrowth / 10 + 0.1f;
+        if (diff > lossLimit)
         {
-            maxGrowth += .05f - diff;
+            maxGrowth += lossLimit- diff;
         }
         
         if (regenerating && size < maxGrowth)
         {
-            AddSize(Time.deltaTime/10);
+            AddSize(Time.deltaTime/5 + Time.deltaTime * diff);
         }
         else regenerating = false;
 

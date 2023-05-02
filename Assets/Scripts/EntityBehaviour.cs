@@ -29,16 +29,22 @@ public class EntityBehaviour : MonoBehaviour
     }
     public void AddSize(float delta)
     {
+        float final = delta;
         if (delta > 0)
         {
-            delta*=growthMultiplier;
+            final *= growthMultiplier;
         }
-        size += delta;
+        size += final;
         UpdateSize();
     }
     public void AddSize(FloatData delta)
     {
-        size += delta.value;
+        float final = delta.value;
+        if (delta.value > 0)
+        {
+            final *= growthMultiplier;
+        }
+        size += final;
         UpdateSize();
     }
 
