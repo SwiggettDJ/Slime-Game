@@ -26,15 +26,12 @@ public class SlimeSize : EntityBehaviour
 
     protected override void UpdateSize()
     {
+        base.UpdateSize();
         if (size > maxGrowth)
             maxGrowth = size;
         if (size <= 0)
         {
             DeathEvent.Invoke();
-        }
-        else
-        {
-            base.UpdateSize();
         }
     }
 
@@ -83,16 +80,20 @@ public class SlimeSize : EntityBehaviour
 
     private void Update()
     {
+        UpdateSize();
         float diff = maxGrowth - size;
         float lossLimit = maxGrowth / 10 + 0.1f;
-        if (diff > lossLimit)
+        if (!regenerating && diff > lossLimit)
         {
-            maxGrowth += lossLimit- diff;
+            maxGrowth += lossLimit - diff;
+            //print("Changed");
         }
-        
-        if (regenerating && size < maxGrowth)
+
+        if (regenerating && size < (maxGrowth - 0.01f))
         {
-            AddSize(Time.deltaTime/5 + Time.deltaTime * diff);
+            //print("Max Growth" + maxGrowth);
+            //print("Size " +size);
+            AddSize(Time.deltaTime + Time.deltaTime * diff);
         }
         else regenerating = false;
 

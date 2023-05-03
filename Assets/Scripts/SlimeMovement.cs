@@ -144,7 +144,7 @@ public class SlimeMovement : MonoBehaviour
             isJumping = false;
         }
         
-        if (Mathf.Abs(direction.x) < 0.1 && !isFalling && !isJumping)
+        if (Mathf.Abs(direction.x) < 0.1 && !isFalling && !isJumping && horizontal == 0)
         {
             GetComponentInChildren<SlimeSize>().Regenerate(true);
         }
