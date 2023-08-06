@@ -26,13 +26,17 @@ public class SlimeSize : EntityBehaviour
 
     protected override void UpdateSize()
     {
-        base.UpdateSize();
         if (size > maxGrowth)
             maxGrowth = size;
         if (size <= 0)
         {
             DeathEvent.Invoke();
         }
+        else
+        {
+            base.UpdateSize();
+        }
+       
     }
 
     private void OnTriggerEnter(Collider other)
