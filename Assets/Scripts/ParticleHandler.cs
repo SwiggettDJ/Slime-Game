@@ -15,6 +15,7 @@ public class ParticleHandler : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         externalForcesModule = ps.externalForces;
         triggerModule = ps.trigger;
+        
         externalForcesModule.enabled = false;
         triggerModule.enabled = false;
     }
@@ -39,4 +40,5 @@ public class ParticleHandler : MonoBehaviour
             triggerModule.enabled = true;
         }
     }
+    
 }
